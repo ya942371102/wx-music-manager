@@ -5,7 +5,12 @@ Vue.use(Router)
 
 export default new Router({
     routes: [{
-        path: '/',
-        component: resolve => require(['../pages/Login.vue'], resolve)
-    }]
+            path: '/',
+            component: resolve => require(['../pages/Login.vue'], resolve)
+        },
+        {
+            path: '/Info',
+            component: resolve => require(['../pages/Info.vue'], resolve)
+        }
+    ]
 })

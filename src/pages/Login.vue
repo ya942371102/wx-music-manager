@@ -20,8 +20,10 @@
 
 
 <script>
+  import {mixin} from '../mixins/index';
   import {getLoginStatus} from '../api/index';
   export default{
+    //mixins:[mixin],
     data:function(){
       return{
         ruleForm:{
@@ -39,6 +41,13 @@
       }
     },
     methods:{
+      //提示信息
+        notify(title, type) {
+            this.$notify({
+                title: title,
+                type: type
+            })
+        },
       submitForm(){
         //alert("提交");
         let params = new URLSearchParams();
@@ -47,13 +56,17 @@
         getLoginStatus(params)
         .then((res) =>{
           if(res.code == 1){
+            this.$router.push("/info");
             this.notify("登录成功","success");
           }else{
             this.notify("登录失败","error");
           }
-        })
+        });
       }
+      
     }
+        
+    
   }
 </script>
 
