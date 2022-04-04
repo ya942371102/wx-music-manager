@@ -28,7 +28,7 @@
       return{
         ruleForm:{
           username: "admin",
-          password: "123"
+          password: "123456"
         },
         rules:{
           username:[
@@ -56,6 +56,8 @@
         getLoginStatus(params)
         .then((res) =>{
           if(res.code == 1){
+            // 增加用户名缓存-->显示出来
+            localStorage.setItem('userName',this.ruleForm.username)
             this.$router.push("/info");
             this.notify("登录成功","success");
           }else{

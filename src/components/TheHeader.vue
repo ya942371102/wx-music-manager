@@ -15,6 +15,15 @@
             <div class="user-avator">
                 <img src="../assets/img/user.jpg" />
             </div>
+            <el-dropdown class="user-name" trigger="click" @command="hadleCommand">
+                <span class="el-dropdown-link">
+                    {{userName}}
+                    <i class="el-icon-caret-bottom"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
         </div>
     </div>
 </template>
@@ -26,6 +35,11 @@ export default {
         return{
             collapse: false,
             fullscreen: false
+        }
+    },
+    computed:{
+        userName(){
+            return localStorage.getItem('userName');
         }
     },
     methods:{
@@ -65,6 +79,12 @@ export default {
                 }
             }
             this.fullscreen = !this.fullscreen;
+        },
+        hadleCommand(command){
+            if(command=="logout"){
+                localStorage.removeItem('userName');
+                this.$router.push("/");
+            }
         }
     }
 }
@@ -118,6 +138,15 @@ export default {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+.user-name{
+    margin-left: 10px;
+}
+
+.el-dropdown-link{
+    color: #ffffff;
+    cursor: pointer;
 }
 
 </style>
