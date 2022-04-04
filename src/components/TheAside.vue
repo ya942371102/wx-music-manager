@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import bus from '../assets/js/bus'
 export default {
     data() {
         return{
@@ -60,6 +61,13 @@ export default {
         onRoutes(){
             return this.$route.path.replace('/','');
         }
+    },
+    created(){
+        //通过Bus进行组件间通信，来折叠侧边栏
+        //msg-->接收以后，让:collapse="collapse"发生变化
+        bus.$on('collapse',msg =>{
+            this.collapse = msg
+        })
     }
 }
 </script>
@@ -76,7 +84,17 @@ export default {
     overflow-y: scroll;
 }
 
-.sidebar-el-menu{
-    width: 300px;
+.sidebar::-webkit-scrollbar{
+    width: 0;
 }
+
+/* collapse为false，也就是折叠的时候就不要使用width */
+.sidebar-el-menu:not(.el-menu--collapse){
+    width: 150px;
+}
+
+.sidebar >ul {
+    height: 100%;
+}
+
 </style>
