@@ -9,8 +9,12 @@ export default new Router({
             component: resolve => require(['../pages/Login.vue'], resolve)
         },
         {
-            path: '/Info',
-            component: resolve => require(['../pages/Info.vue'], resolve)
+            path: '/home',
+            component: resolve => require(['../components/Home.vue'], resolve),
+            children: [{
+                path: '/info',
+                component: resolve => require(['../pages/Info.vue'], resolve)
+            }]
         }
     ]
 })
